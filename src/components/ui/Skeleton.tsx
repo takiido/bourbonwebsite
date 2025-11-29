@@ -1,24 +1,18 @@
 import styles from './Skeleton.module.css';
 
 interface SkeletonProps {
+    className?: string;
     width?: string | number;
     height?: string | number;
-    className?: string;
-    variant?: 'text' | 'rect' | 'circle';
     style?: React.CSSProperties;
 }
 
-export default function Skeleton({ width, height, className = '', variant = 'rect', style = {} }: SkeletonProps) {
-    const combinedStyle = {
+export default function Skeleton({ className = '', width, height, style }: SkeletonProps) {
+    const combinedStyle: React.CSSProperties = {
         width: width,
         height: height,
         ...style,
     };
 
-    return (
-        <div
-            className={`${styles.skeleton} ${styles[variant]} ${className}`}
-            style={combinedStyle}
-        />
-    );
+    return <div className={`${styles.skeleton} ${className}`} style={combinedStyle} />;
 }

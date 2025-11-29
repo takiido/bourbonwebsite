@@ -57,7 +57,7 @@
 
 
     &::after {
-        display: block;
+        display: none;
         content: "Bourbon Street Billiards";
         color: rgb(196, 184, 150);
         font-size: 1.5rem;
@@ -67,7 +67,7 @@
 }
 
 .logoImage {
-    display: none;
+    display: block;
     object-fit: contain;
     height: auto;
 }
@@ -155,7 +155,7 @@
     background-color: var(--color-text);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 920px) {
     .container {
         display: flex;
         justify-content: space-between;
