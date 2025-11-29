@@ -5,7 +5,7 @@ export default function Footer() {
         <footer className={styles.footer}>
             <div className={styles.container}>
                 <div className={styles.section}>
-                    <h3 className={styles.heading}>Bourbon Pool Hall</h3>
+                    <h3 className={styles.heading}>Bourbon Street Billiards</h3>
                     <p className={styles.text}>Where elegance meets the game.</p>
                 </div>
                 <div className={styles.section}>
@@ -19,7 +19,7 @@ export default function Footer() {
                 </div>
             </div>
             <div className={styles.copyright}>
-                &copy; {new Date().getFullYear()} Bourbon Pool Hall. All rights reserved.
+                &copy; {new Date().getFullYear()} Bourbon Street Billiards. All rights reserved.
                 <div className={styles.credit}>
                     Made by <a href="https://takiido.dev/" target="_blank" rel="noopener noreferrer" className={styles.creditLink}>Takiido</a>
                 </div>

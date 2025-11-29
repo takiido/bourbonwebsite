@@ -364,3 +364,93 @@
     text-overflow: ellipsis;
     max-width: 300px;
 }
+
+/* Mobile Responsiveness */
+.mobileHeader {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #141814;
+    border-bottom: 1px solid rgba(196, 184, 150, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.menuButton {
+    background: none;
+    border: none;
+    color: var(--color-accent);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        padding-top: 60px;
+        /* Adjust for mobile header */
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 60px;
+        /* Below mobile header */
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 60px);
+        z-index: 999;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        border-right: none;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .mobileHeader {
+        display: flex;
+    }
+
+    .mainContent {
+        padding: 1.5rem;
+        height: auto;
+        overflow: visible;
+    }
+
+    .topBar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .pageTitle {
+        font-size: 2rem;
+    }
+
+    .cardGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .tableContainer {
+        overflow-x: auto;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .modal {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}

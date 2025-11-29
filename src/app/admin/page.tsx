@@ -11,6 +11,7 @@ export default function AdminDashboard() {
     const [data, setData] = useState<AppData | null>(null);
     const [activeTab, setActiveTab] = useState<'events' | 'menu' | 'league'>('events');
     const [loading, setLoading] = useState(true);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -60,6 +61,15 @@ export default function AdminDashboard() {
         router.push('/admin/login');
     };
 
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const handleTabChange = (tab: 'events' | 'menu' | 'league') => {
+        setActiveTab(tab);
+        setIsMobileMenuOpen(false); // Close menu on selection
+    };
+
     if (loading) return (
         <div className={styles.container}>
             <aside className={styles.sidebar}>
@@ -92,26 +102,34 @@ export default function AdminDashboard() {
 
     return (
         <div className={styles.container}>
-            <aside className={styles.sidebar}>
+            {/* Mobile Header */}
+            <div className={styles.mobileHeader}>
+                <h2 className={styles.sidebarTitle}>Bourbon Admin</h2>
+                <button className={styles.menuButton} onClick={toggleMobileMenu}>
+                    {isMobileMenuOpen ? '✕' : '☰'}
+                </button>
+            </div>
+
+            <aside className={`${styles.sidebar} ${isMobileMenuOpen ? styles.open : ''}`}>
                 <div className={styles.sidebarHeader}>
                     <h2 className={styles.sidebarTitle}>Bourbon Admin</h2>
                 </div>
                 <nav className={styles.nav}>
                     <button
                         className={`${styles.navItem} ${activeTab === 'events' ? styles.active : ''}`}
-                        onClick={() => setActiveTab('events')}
+                        onClick={() => handleTabChange('events')}
                     >
                         Events
                     </button>
                     <button
                         className={`${styles.navItem} ${activeTab === 'menu' ? styles.active : ''}`}
-                        onClick={() => setActiveTab('menu')}
+                        onClick={() => handleTabChange('menu')}
                     >
                         Menu
                     </button>
                     <button
                         className={`${styles.navItem} ${activeTab === 'league' ? styles.active : ''}`}
-                        onClick={() => setActiveTab('league')}
+                        onClick={() => handleTabChange('league')}
                     >
                         League
                     </button>

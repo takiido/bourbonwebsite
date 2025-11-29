@@ -28,7 +28,7 @@ export default function Header() {
                 <Link href="/" className={styles.logo} onClick={() => setIsMenuOpen(false)}>
                     <img
                         src="/assets/logo.png"
-                        alt="Bourbon Pool Hall"
+                        alt="Bourbon Street Billiards"
                         width={120}
                         height={32}
                         className={styles.logoImage}

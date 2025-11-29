@@ -15,6 +15,7 @@ export default async function MenuPage() {
                                 <div key={idx} className={styles.item}>
                                     <div className={styles.itemHeader}>
                                         <h3 className={styles.itemName}>{item.name}</h3>
+                                        <span className={styles.spacer}></span>
                                         <span className={styles.itemPrice}>$ {item.price}</span>
                                     </div>
                                     <p className={styles.itemDescription}>{item.description}</p>

@@ -7,8 +7,8 @@ export default function Home() {
         <main className={styles.main}>
             <section className={styles.hero}>
                 <div className={styles.heroContent}>
-                    <h1 className={styles.title}>Bourbon Pool Hall</h1>
-                    <p className={styles.subtitle}>Elegance. Precision. Atmosphere.</p>
+                    <h1 className={styles.title}>Bourbon Street Billiards</h1>
+                    <p className={styles.subtitle}>Best Pool Hall in Winnipeg</p>
                     <div className={styles.ctaGroup}>
                         <Button href="/events" className={styles.heroButton}>View Events</Button>
                         <Button href="/menu" variant="outline" className={styles.heroButton}>See Menu</Button>
@@ -35,7 +35,7 @@ export default function Home() {
                 <div className={styles.aboutContent}>
                     <h2 className={styles.sectionTitle}>About Us</h2>
                     <p className={styles.aboutText}>
-                        Located in the heart of the city, Bourbon Pool Hall offers a sophisticated environment for billiards enthusiasts.
+                        Located in the heart of the city, Bourbon Street Billiards offers a sophisticated environment for billiards enthusiasts.
                         Whether you are a seasoned pro or just looking for a night out with friends, our upscale atmosphere and
                         top-tier equipment provide the perfect setting.
                     </p>
