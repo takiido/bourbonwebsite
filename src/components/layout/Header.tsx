@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

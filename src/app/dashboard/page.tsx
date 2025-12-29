@@ -3,7 +3,7 @@
 import { authClient } from '@/lib/auth/client';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import styles from './page.module.css';
+import styles from './page.module.scss';
 
 export default function UserDashboard() {
     const router = useRouter();
@@ -17,7 +17,7 @@ export default function UserDashboard() {
 
     if (isPending) {
         return (
-            <main className={styles.main}>
+            <main className={styles.container}>
                 <div className={styles.card}>
                     <p>Loading...</p>
                 </div>

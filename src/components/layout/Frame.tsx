@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import styles from './Frame.module.css';
+import styles from './Frame.module.scss';
 
 export default function Frame() {
     const pathname = usePathname();

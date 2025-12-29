@@ -41,6 +41,42 @@ export interface AppData {
     rates: BilliardRate[];
 }
 
+// Database row types
+interface EventRow {
+    id: number;
+    title: string;
+    date: string;
+    description: string;
+}
+
+interface MenuCategoryRow {
+    id: number;
+    title: string;
+}
+
+interface MenuItemRow {
+    category_id: number;
+    name: string;
+    price: string;
+    description: string;
+}
+
+interface LeagueTeamRow {
+    rank: number;
+    team: string;
+    played: number;
+    won: number;
+    lost: number;
+    points: number;
+}
+
+interface BilliardRateRow {
+    id: number;
+    title: string;
+    price: string;
+    description: string;
+}
+
 export async function getData(): Promise<AppData> {
     try {
         const eventsRes = await pool.query('SELECT * FROM events ORDER BY id DESC');
@@ -51,12 +87,12 @@ export async function getData(): Promise<AppData> {
         const itemsRes = await pool.query('SELECT * FROM menu_items');
         const ratesRes = await pool.query('SELECT * FROM billiard_rates ORDER BY id ASC');
 
-        const menu: MenuCategory[] = categoriesRes.rows.map((cat: any) => {
+        const menu: MenuCategory[] = categoriesRes.rows.map((cat: MenuCategoryRow) => {
             return {
                 title: cat.title,
                 items: itemsRes.rows
-                    .filter((item: any) => item.category_id === cat.id)
-                    .map((item: any) => ({
+                    .filter((item: MenuItemRow) => item.category_id === cat.id)
+                    .map((item: MenuItemRow) => ({
                         name: item.name,
                         price: item.price,
                         description: item.description
@@ -70,14 +106,14 @@ export async function getData(): Promise<AppData> {
         }
 
         return {
-            events: eventsRes.rows.map((row: any) => ({
+            events: eventsRes.rows.map((row: EventRow) => ({
                 id: Number(row.id),
                 title: row.title,
                 date: row.date,
                 description: row.description
             })),
             menu,
-            league: leagueRes.rows.map((row: any) => ({
+            league: leagueRes.rows.map((row: LeagueTeamRow) => ({
                 rank: row.rank,
                 team: row.team,
                 played: row.played,
@@ -85,7 +121,7 @@ export async function getData(): Promise<AppData> {
                 lost: row.lost,
                 points: row.points
             })),
-            rates: ratesRes.rows.map((row: any) => ({
+            rates: ratesRes.rows.map((row: BilliardRateRow) => ({
                 id: Number(row.id),
                 title: row.title,
                 price: row.price,

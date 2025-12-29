@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './Footer.module.css';
+import styles from './Footer.module.scss';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 

@@ -1,5 +1,5 @@
 import Button from '@/components/ui/Button';
-import styles from './page.module.css';
+import styles from './page.module.scss';
 import Link from 'next/link';
 
 export default function Home() {

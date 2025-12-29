@@ -1,7 +1,7 @@
 import { authClient } from '@/lib/auth/client';
 import { NeonAuthUIProvider } from '@neondatabase/auth/react';
 import type { Metadata } from 'next';
-import './globals.css';
+import './globals.scss';
 
 import NextTopLoader from 'nextjs-toploader';
 import Header from '@/components/layout/Header';

@@ -1,4 +1,4 @@
-import styles from './page.module.css';
+import styles from './page.module.scss';
 
 import GalleryImage from '@/components/gallery/GalleryImage';
 

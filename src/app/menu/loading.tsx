@@ -1,4 +1,4 @@
-import styles from './page.module.css';
+import styles from './page.module.scss';
 import Skeleton from '@/components/ui/Skeleton';
 
 export default function Loading() {

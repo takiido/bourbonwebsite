@@ -1,5 +1,5 @@
 import Skeleton from '@/components/ui/Skeleton';
-import styles from './loading.module.css';
+import styles from './loading.module.scss';
 
 export default function Loading() {
     return (

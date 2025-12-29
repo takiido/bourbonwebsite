@@ -1,5 +1,5 @@
 import { getData } from '@/lib/data';
-import styles from './page.module.css';
+import styles from './page.module.scss';
 
 export default async function ContactPage() {
     const { rates } = await getData();

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Skeleton from '@/components/ui/Skeleton';
-import styles from './GalleryImage.module.css';
+import styles from './GalleryImage.module.scss';
 
 interface GalleryImageProps {
     src: string;

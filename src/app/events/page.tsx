@@ -1,4 +1,4 @@
-import styles from './page.module.css';
+import styles from './page.module.scss';
 import { getData } from '@/lib/data';
 
 export default async function EventsPage() {
