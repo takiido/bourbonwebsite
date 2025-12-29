@@ -13,9 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
     "@stackframe/stack": "^2.8.54",
     "@types/pg": "^8.15.6",
     "bcryptjs": "^3.0.3",
+    "drizzle-orm": "^0.45.1",
     "jose": "^6.1.2",
     "next": "16.0.10",
     "nextjs-toploader": "^3.9.17",
@@ -29,6 +31,8 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "dotenv": "^17.2.3",
+    "drizzle-kit": "^0.31.8",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.4",
     "typescript": "^5.9.3"
