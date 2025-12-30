@@ -7,7 +7,7 @@ export default async function AuthPage({ params }: { params: Promise<{ path: str
     const { path } = await params;
 
     return (
-        <main className={styles['auth']}>
+        <main className={`${styles['auth']} auth-page-wrapper`}>
             <AuthView path={path} />
         </main>
     );
