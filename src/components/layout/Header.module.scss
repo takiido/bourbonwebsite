@@ -162,9 +162,18 @@
         height: 20px;
         background: transparent;
         border: none;
-        margin: 5px auto;
-        display: block;
+        cursor: pointer;
+        z-index: 1002;
+
+        @media (max-width: 768px) {
+            display: flex;
+        }
+    }
+
+    .header__hamburger-bar {
+        width: 100%;
+        height: 2px;
         background-color: var(--color-text);
-        transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease;
     }
 }
