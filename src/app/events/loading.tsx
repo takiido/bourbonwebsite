@@ -1,24 +1,16 @@
-import styles from './page.module.css';
 import Skeleton from '@/components/ui/Skeleton';
+import styles from '../loading.module.scss';
+import pageStyles from './page.module.scss';
 
 export default function Loading() {
     return (
-        <main className={styles.main}>
-            <h1 className={styles.title}>Upcoming Events</h1>
-            <div className={styles.eventsList}>
+        <div className={pageStyles['events']}>
+            <Skeleton width={200} height={40} className={styles['loading__title']} />
+            <div className={styles['loading__list']}>
                 {[1, 2, 3].map((i) => (
-                    <div key={i} className={styles.eventCard}>
-                        <div className={styles.dateBox}>
-                            <Skeleton width={120} height={24} />
-                        </div>
-                        <div className={styles.content}>
-                            <Skeleton width="60%" height={32} style={{ marginBottom: '0.5rem' }} />
-                            <Skeleton width="100%" height={20} style={{ marginBottom: '0.5rem' }} />
-                            <Skeleton width="80%" height={20} />
-                        </div>
-                    </div>
+                    <Skeleton key={i} width="100%" height={180} />
                 ))}
             </div>
-        </main>
+        </div>
     );
 }

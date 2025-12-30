@@ -1,0 +1,64 @@
+// Rates Page Styles
+// Block: rates
+
+.rates {
+    max-width: 1000px;
+    min-height: 80vh;
+    margin: 0 auto;
+    padding: calc(var(--header-height) + 2rem) 2rem 4rem;
+}
+
+.rates__title {
+    margin-bottom: 4rem;
+    font-size: 3rem;
+    text-align: center;
+    color: var(--color-accent);
+
+    @media (max-width: 768px) {
+        font-size: 2.5rem;
+    }
+}
+
+.rates__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.rates__card {
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid rgba(196, 184, 150, 0.1);
+    border-radius: 4px;
+    background: var(--color-surface);
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: var(--color-accent);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-5px);
+    }
+}
+
+.rates__card-title {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: var(--color-text);
+}
+
+.rates__card-price {
+    margin-bottom: 1.5rem;
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-accent);
+}
+
+.rates__card-desc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+}

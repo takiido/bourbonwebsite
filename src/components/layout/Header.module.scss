@@ -1,0 +1,179 @@
+// Header Component Styles
+
+.header {
+    width: 100%;
+    height: 96px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid rgba(196, 184, 150, 0.2);
+    background-color: #141814;
+    transition: all 0.3s ease, height 0.14s ease;
+    z-index: 100;
+
+    &.scrolled {
+        height: 48px;
+        padding: 0.25rem 0;
+        left: 0;
+        background-color: transparent;
+        transition: all 0.3s ease;
+        z-index: 1000;
+
+        &.header--scrolled {
+            background-color: rgba(20, 24, 20, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    .header__container {
+        width: 100%;
+        max-width: 1400px;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @media (max-width: 992px) {
+            padding: 0 1.5rem;
+        }
+    }
+
+    .header__logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .header__logo-image {
+        width: 140px;
+        height: auto;
+        object-fit: contain;
+
+        @media (max-width: 992px) {
+            width: 120px;
+        }
+    }
+
+    // Navigation
+    .header__nav {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+
+        @media (max-width: 992px) {
+            width: 100%;
+            height: 100vh;
+            padding-top: var(--header-height);
+            flex-direction: column;
+            justify-content: flex-start;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #141814;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 999;
+
+            &.header__nav--open {
+                transform: translateY(0);
+            }
+        }
+    }
+
+    .header__nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+
+        @media (max-width: 992px) {
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+    }
+
+    .header__nav-link {
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 1px;
+        color: var(--color-text);
+        position: relative;
+        transition: color 0.2s ease;
+
+        &::after {
+            content: '';
+            width: 0;
+            height: 2px;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        &:hover {
+            color: var(--color-accent);
+
+            &::after {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            font-size: 1.5rem;
+        }
+    }
+
+    .header__book-button {
+        padding: 0.8rem 2rem;
+        font-family: var(--font-heading);
+        font-size: 1rem;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 1px;
+        color: var(--color-background);
+        border: 1px solid var(--color-accent);
+        border-radius: 4px;
+        background-color: var(--color-accent);
+        transition: all 0.2s ease;
+
+        &:hover {
+            color: var(--color-accent);
+            background-color: transparent;
+        }
+
+        @media (max-width: 992px) {
+            margin-top: 2rem;
+        }
+    }
+
+    // Mobile Hamburger
+    .header__hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 20px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 1002;
+
+        @media (max-width: 992px) {
+            display: flex;
+        }
+    }
+
+    .header__hamburger-bar {
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-text);
+        transition: all 0.3s ease;
+    }
+}

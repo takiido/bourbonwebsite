@@ -1,0 +1,63 @@
+// Loading Page Styles
+// Block: loading
+
+.loading {
+    min-height: 100vh;
+    padding: var(--header-height) 1rem 4rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.loading__content {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.loading__title {
+    margin: 0 auto 4rem;
+    display: block;
+}
+
+.loading__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+// Dashboard Specific
+.loading__dashboard {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.loading__dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+// Events / Menu List
+.loading__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+// Gallery Grid
+.loading__grid--gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+// Data Table (League)
+.loading__table {
+    width: 100%;
+
+    .loading__table-row {
+        margin-bottom: 1rem;
+    }
+}

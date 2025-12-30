@@ -1,35 +1,56 @@
-import type { Metadata } from 'next'
-import { StackProvider, StackTheme } from "@stackframe/stack";
-import { stackClientApp } from "../stack/client";
-import './globals.css'
+import { authClient } from '@/lib/auth/client';
+import { NeonAuthUIProvider } from '@neondatabase/auth/react';
+import type { Metadata } from 'next';
+import './globals.scss';
+
+import NextTopLoader from 'nextjs-toploader';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import Frame from '@/components/layout/Frame';
+
+import { Playfair_Display, Cormorant_Garamond, Crimson_Text } from 'next/font/google';
+
+const playfair = Playfair_Display({
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-heading',
+});
+
+const cormorant = Cormorant_Garamond({
+    subsets: ['latin'],
+    display: 'swap',
+    weight: ['300', '400', '500', '600', '700'],
+    variable: '--font-subheading',
+});
+
+const crimson = Crimson_Text({
+    subsets: ['latin'],
+    display: 'swap',
+    weight: ['400', '600', '700'],
+    variable: '--font-body',
+});
 
 export const metadata: Metadata = {
     title: 'Bourbon Street Billiards',
     description: 'The premier pool hall experience.',
-}
-
-import NextTopLoader from 'nextjs-toploader';
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import Frame from '@/components/layout/Frame'
+};
 
 export default function RootLayout({
     children,
 }: {
-    children: React.ReactNode
+    children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
-            <head>
-                <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
-            </head>
-            <body><StackProvider app={stackClientApp}><StackTheme>
-                <NextTopLoader color="#D4AF37" showSpinner={false} />
-                <Frame />
-                <Header />
-                {children}
-                <Footer />
-            </StackTheme></StackProvider></body>
+        <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${cormorant.variable} ${crimson.variable}`}>
+            <body>
+                <NeonAuthUIProvider authClient={authClient} redirectTo="/panel">
+                    <NextTopLoader color="#D4AF37" showSpinner={false} />
+                    <Frame />
+                    <Header />
+                    {children}
+                    <Footer />
+                </NeonAuthUIProvider>
+            </body>
         </html>
-    )
+    );
 }

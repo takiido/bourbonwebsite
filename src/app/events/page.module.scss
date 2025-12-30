@@ -1,0 +1,93 @@
+// Events Page Styles
+// Block: events
+
+.events {
+    max-width: 1000px;
+    min-height: 80vh;
+    margin: 0 auto;
+    padding: calc(var(--header-height) + 2rem) 2rem 4rem;
+}
+
+.events__title {
+    margin-bottom: 3rem;
+    font-size: 3rem;
+    text-align: center;
+    color: var(--color-accent);
+
+    @media (max-width: 768px) {
+        font-size: 2.5rem;
+    }
+}
+
+.events__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.events__card {
+    display: flex;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+    background-color: var(--color-surface);
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: var(--color-accent);
+        background-color: var(--color-surface-hover);
+        box-shadow: var(--shadow-md);
+        transform: translateX(10px);
+    }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.events__card-date-box {
+    min-width: 200px;
+    padding: 2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: var(--color-primary-dark);
+
+    @media (max-width: 768px) {
+        min-width: auto;
+        padding: 1rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+}
+
+.events__card-date-text {
+    font-family: var(--font-subheading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-accent);
+}
+
+.events__card-content {
+    padding: 2rem;
+    flex: 1;
+
+    @media (max-width: 768px) {
+        padding: 1.5rem;
+    }
+}
+
+.events__card-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    color: var(--color-accent);
+}
+
+.events__card-desc {
+    line-height: 1.6;
+    color: var(--color-text-muted);
+}

@@ -41,22 +41,58 @@ export interface AppData {
     rates: BilliardRate[];
 }
 
+// Database row types
+interface EventRow {
+    id: number;
+    title: string;
+    date: string;
+    description: string;
+}
+
+interface MenuCategoryRow {
+    id: number;
+    title: string;
+}
+
+interface MenuItemRow {
+    category_id: number;
+    name: string;
+    price: string;
+    description: string;
+}
+
+interface LeagueTeamRow {
+    rank: number;
+    team: string;
+    played: number;
+    won: number;
+    lost: number;
+    points: number;
+}
+
+interface BilliardRateRow {
+    id: number;
+    title: string;
+    price: string;
+    description: string;
+}
+
 export async function getData(): Promise<AppData> {
     try {
-        const eventsRes = await pool.query('SELECT * FROM events ORDER BY id DESC');
-        const leagueRes = await pool.query('SELECT * FROM league_teams ORDER BY rank ASC');
+        const [eventsRes, leagueRes, categoriesRes, itemsRes, ratesRes] = await Promise.all([
+            pool.query('SELECT * FROM events ORDER BY id DESC'),
+            pool.query('SELECT * FROM league_teams ORDER BY rank ASC'),
+            pool.query('SELECT * FROM menu_categories ORDER BY id ASC'),
+            pool.query('SELECT * FROM menu_items'),
+            pool.query('SELECT * FROM billiard_rates ORDER BY id ASC')
+        ]);
 
-        // Fetch menu categories and items
-        const categoriesRes = await pool.query('SELECT * FROM menu_categories ORDER BY id ASC');
-        const itemsRes = await pool.query('SELECT * FROM menu_items');
-        const ratesRes = await pool.query('SELECT * FROM billiard_rates ORDER BY id ASC');
-
-        const menu: MenuCategory[] = categoriesRes.rows.map((cat: any) => {
+        const menu: MenuCategory[] = categoriesRes.rows.map((cat: MenuCategoryRow) => {
             return {
                 title: cat.title,
                 items: itemsRes.rows
-                    .filter((item: any) => item.category_id === cat.id)
-                    .map((item: any) => ({
+                    .filter((item: MenuItemRow) => item.category_id === cat.id)
+                    .map((item: MenuItemRow) => ({
                         name: item.name,
                         price: item.price,
                         description: item.description
@@ -70,14 +106,14 @@ export async function getData(): Promise<AppData> {
         }
 
         return {
-            events: eventsRes.rows.map((row: any) => ({
+            events: eventsRes.rows.map((row: EventRow) => ({
                 id: Number(row.id),
                 title: row.title,
                 date: row.date,
                 description: row.description
             })),
             menu,
-            league: leagueRes.rows.map((row: any) => ({
+            league: leagueRes.rows.map((row: LeagueTeamRow) => ({
                 rank: row.rank,
                 team: row.team,
                 played: row.played,
@@ -85,7 +121,7 @@ export async function getData(): Promise<AppData> {
                 lost: row.lost,
                 points: row.points
             })),
-            rates: ratesRes.rows.map((row: any) => ({
+            rates: ratesRes.rows.map((row: BilliardRateRow) => ({
                 id: Number(row.id),
                 title: row.title,
                 price: row.price,
@@ -155,3 +191,92 @@ export async function saveData(data: AppData) {
         client.release();
     }
 }
+
+// Individual save functions for granular updates
+export async function saveEvents(events: Event[]) {
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        await client.query('TRUNCATE events RESTART IDENTITY CASCADE');
+        for (const event of events) {
+            await client.query(
+                'INSERT INTO events (id, title, date, description) VALUES ($1, $2, $3, $4)',
+                [event.id, event.title, event.date, event.description]
+            );
+        }
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        throw error;
+    } finally {
+        client.release();
+    }
+}
+
+export async function saveMenu(menu: MenuCategory[]) {
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        await client.query('TRUNCATE menu_categories, menu_items RESTART IDENTITY CASCADE');
+        for (const category of menu) {
+            const catRes = await client.query(
+                'INSERT INTO menu_categories (title) VALUES ($1) RETURNING id',
+                [category.title]
+            );
+            const catId = catRes.rows[0].id;
+            for (const item of category.items) {
+                await client.query(
+                    'INSERT INTO menu_items (category_id, name, price, description) VALUES ($1, $2, $3, $4)',
+                    [catId, item.name, item.price, item.description]
+                );
+            }
+        }
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        throw error;
+    } finally {
+        client.release();
+    }
+}
+
+export async function saveLeague(league: LeagueTeam[]) {
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        await client.query('TRUNCATE league_teams RESTART IDENTITY CASCADE');
+        for (const team of league) {
+            await client.query(
+                'INSERT INTO league_teams (rank, team, played, won, lost, points) VALUES ($1, $2, $3, $4, $5, $6)',
+                [team.rank, team.team, team.played, team.won, team.lost, team.points]
+            );
+        }
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        throw error;
+    } finally {
+        client.release();
+    }
+}
+
+export async function saveRates(rates: BilliardRate[]) {
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        await client.query('TRUNCATE billiard_rates RESTART IDENTITY CASCADE');
+        for (const rate of rates) {
+            await client.query(
+                'INSERT INTO billiard_rates (id, title, price, description) VALUES ($1, $2, $3, $4)',
+                [rate.id, rate.title, rate.price, rate.description]
+            );
+        }
+        await client.query('COMMIT');
+    } catch (error) {
+        await client.query('ROLLBACK');
+        throw error;
+    } finally {
+        client.release();
+    }
+}
+

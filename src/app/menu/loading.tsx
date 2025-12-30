@@ -1,31 +1,23 @@
-import styles from './page.module.css';
 import Skeleton from '@/components/ui/Skeleton';
+import styles from '../loading.module.scss';
+import pageStyles from './page.module.scss';
 
 export default function Loading() {
     return (
-        <main className={styles.main}>
-            <h1 className={styles.title}>Food & Drink</h1>
-            <div className={styles.menuContainer}>
-                {[1, 2, 3].map((category) => (
-                    <section key={category} className={styles.category}>
-                        <div style={{ marginBottom: '2rem' }}>
-                            <Skeleton width={200} height={40} />
-                        </div>
-                        <div className={styles.items}>
-                            {[1, 2, 3, 4].map((item) => (
-                                <div key={item} className={styles.item}>
-                                    <div className={styles.itemHeader}>
-                                        <Skeleton width={150} height={24} />
-                                        <Skeleton width={60} height={24} />
-                                    </div>
-                                    <Skeleton width="100%" height={16} />
-                                    <Skeleton width="80%" height={16} style={{ marginTop: '0.5rem' }} />
-                                </div>
+        <div className={pageStyles['menu']}>
+            <Skeleton width={200} height={40} className={styles['loading__title']} />
+            <div className={styles['loading__list']}>
+                {[1, 2].map((section) => (
+                    <div key={section}>
+                        <Skeleton width={150} height={30} style={{ marginBottom: '1.5rem' }} />
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            {[1, 2, 3].map((item) => (
+                                <Skeleton key={item} width="100%" height={80} />
                             ))}
                         </div>
-                    </section>
+                    </div>
                 ))}
             </div>
-        </main>
+        </div>
     );
 }

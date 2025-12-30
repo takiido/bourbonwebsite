@@ -1,0 +1,82 @@
+// Frame Component Styles
+
+.frame {
+    width: 100vw;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99;
+
+    @media (max-width: 1024px) {
+        display: none;
+    }
+}
+
+.frame__corner {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    border-color: var(--color-accent);
+    pointer-events: none;
+    opacity: 0.5;
+    overflow: hidden;
+
+    &--tl {
+        top: 20px;
+        left: 20px;
+        border-top: 1px solid;
+        border-left: 1px solid;
+
+        &::after {
+            right: -30px;
+            bottom: 10px;
+        }
+    }
+
+    &--tr {
+        top: 20px;
+        right: 20px;
+        border-top: 1px solid;
+        border-right: 1px solid;
+    }
+
+    &--bl {
+        bottom: 20px;
+        left: 20px;
+        border-bottom: 1px solid;
+        border-left: 1px solid;
+    }
+
+    &--br {
+        bottom: 20px;
+        right: 20px;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
+    }
+}
+
+.frame__text {
+    font-family: var(--font-subheading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 6px;
+    color: var(--color-accent);
+    position: absolute;
+    top: 50%;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: translateY(-50%);
+    opacity: 0.8;
+
+    &--left {
+        left: 20px;
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    &--right {
+        right: 20px;
+    }
+}
